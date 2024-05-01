@@ -9,7 +9,7 @@ client = Client(account_sid, auth_token)
 # Create your views here.
 @csrf_exempt
 def bot(request):
-    print(request)
+    print(request.POST)
     # message = request.POST['Body']
     # sender_name = request.POST['ProfileName']
     # sender_number = request.POST['From']

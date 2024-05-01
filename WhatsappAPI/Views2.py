@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from twilio.twiml.messaging_response import MessagingResponse
+from django.http import HttpResponseNotAllowed
 
 @csrf_exempt
 def whatsapp_webhook(request):
@@ -17,7 +18,8 @@ def whatsapp_webhook(request):
         
         return HttpResponse(str(twiml_response))
     else:
-        return HttpResponse(status=405)
+        return HttpResponseNotAllowed(['POST'])
+
 
 def process_message(message):
     # Add your custom logic to process the incoming message

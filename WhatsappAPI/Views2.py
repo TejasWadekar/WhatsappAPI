@@ -11,6 +11,7 @@ def whatsapp_webhook(request):
         
         # Process the incoming message
         response_message = process_message(incoming_message)
+        print(response_message)
         
         # Prepare TwiML response
         twiml_response = MessagingResponse()

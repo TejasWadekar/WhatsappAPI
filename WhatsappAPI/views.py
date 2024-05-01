@@ -16,7 +16,7 @@ def bot(request):
         client.messages.create(
             from_ = 'whatsapp:+14155238886',
             body = f"hi {sender_name} How are you?",
-            to = sender_number,
+            to = 'whatsapp:+917058921518',
 
         )
     return HttpResponse("hello")

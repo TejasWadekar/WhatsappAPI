@@ -13,12 +13,12 @@ def bot(request):
     message = request.POST['Body']
     sender_name = request.POST['ProfileName']
     sender_number = request.POST['From']
-    ptint(message, sender_name, sender_number)
-    # if message == "hi":
-    #     client.messages.create(
-    #         from_ = 'whatsapp:+14155238886',
-    #         body = f"hi {sender_name} How are you?",
-    #         to = 'whatsapp:+917058921518',
+    print(message, sender_name, sender_number)
+    
+    # client.messages.create(
+    #     from_ = 'whatsapp:+14155238886',
+    #     body = f"hi {sender_name} How are you?",
+    #     to = 'whatsapp:+917058921518',
 
-    #     )
+    # )
     return HttpResponse("hello")

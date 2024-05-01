@@ -28,4 +28,4 @@ def bot(request):
     )
 
     print(message.sid)
-    # return HttpResponse("hello")
+    return HttpResponse("hello")

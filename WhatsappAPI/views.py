@@ -10,9 +10,10 @@ client = Client(account_sid, auth_token)
 @csrf_exempt
 def bot(request):
     print(request.POST)
-    # message = request.POST['Body']
-    # sender_name = request.POST['ProfileName']
-    # sender_number = request.POST['From']
+    message = request.POST['Body']
+    sender_name = request.POST['ProfileName']
+    sender_number = request.POST['From']
+    ptint(message, sender_name, sender_number)
     # if message == "hi":
     #     client.messages.create(
     #         from_ = 'whatsapp:+14155238886',

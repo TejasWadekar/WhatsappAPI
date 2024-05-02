@@ -9,7 +9,7 @@ account_sid = 'ACff1c255543fb69ccf7c78b54ee85d2ee'
 auth_token = '25d3bc402171e7e2840bdee6d6091237'
 
 @csrf_exempt
-def whatsapp_reply(request):
+def bot(request):
     if request.method == 'POST':
         # Get the message the user sent our Twilio number
         body = request.POST.get('Body', '')

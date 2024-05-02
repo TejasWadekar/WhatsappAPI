@@ -21,13 +21,13 @@ def bot(request):
         #     to = 'whatsapp:+917058921518',
     
         # )
-    if request.method == 'POST':
+    # if request.method == 'POST':
         
-        message = client.messages.create(
-            from_='whatsapp:+14155238886',
-            body='hello',
-            to=sender_number,
-        )
+    #     message = client.messages.create(
+    #         from_='whatsapp:+14155238886',
+    #         body='hello',
+    #         to=sender_number,
+    #     )
     
-        print(message.sid)
+    #     print(message.sid)
     return HttpResponse("hello")

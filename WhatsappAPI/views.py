@@ -15,12 +15,12 @@ def bot(request):
     # sender_number = request.POST['From']
     # print(message, sender_name, sender_number)
         
-    client.messages.create(
-        from_ = 'whatsapp:+14155238886',
-        body = "How are you?",
-        to = 'whatsapp:+917058921518',
+    # client.messages.create(
+    #     from_ = 'whatsapp:+14155238886',
+    #     body = "How are you?",
+    #     to = 'whatsapp:+917058921518',
 
-    )
+    # )
     # if request.method == 'POST':
         
     #     message = client.messages.create(

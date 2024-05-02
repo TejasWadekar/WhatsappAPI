@@ -3,7 +3,7 @@ from django.shortcuts import render
 from twilio.rest import Client
 from django.views.decorators.csrf import csrf_exempt
 account_sid = 'ACff1c255543fb69ccf7c78b54ee85d2ee'
-auth_token = 'b4d00d19255f887be8e45852b2ddbfec'
+auth_token = '25d3bc402171e7e2840bdee6d6091237'
 client = Client(account_sid, auth_token)
 
 # Create your views here.

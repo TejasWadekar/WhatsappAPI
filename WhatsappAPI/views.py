@@ -14,9 +14,12 @@ def bot(request):
     # sender_name = request.POST['ProfileName']
     # sender_number = request.POST['From']
     # print(message, sender_name, sender_number)
-        
-    
     if request.method == 'POST':
+        if 'Body' in request.POST:
+            message = request.POST['Body']
+            # rest of your code
+        else:
+            print("Body not in POST data")
         
         message = client.messages.create(
         from_ = 'whatsapp:+14155238886',

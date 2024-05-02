@@ -9,18 +9,18 @@ client = Client(account_sid, auth_token)
 # Create your views here.
 @csrf_exempt
 def bot(request):
-    print(request.POST)
-    message = request.POST['Body']
-    sender_name = request.POST['ProfileName']
-    sender_number = request.POST['From']
-    print(message, sender_name, sender_number)
+    # print(request.POST)
+    # message = request.POST['Body']
+    # sender_name = request.POST['ProfileName']
+    # sender_number = request.POST['From']
+    # print(message, sender_name, sender_number)
         
-        # client.messages.create(
-        #     from_ = 'whatsapp:+14155238886',
-        #     body = "How are you?",
-        #     to = 'whatsapp:+917058921518',
-    
-        # )
+    client.messages.create(
+        from_ = 'whatsapp:+14155238886',
+        body = "How are you?",
+        to = 'whatsapp:+917058921518',
+
+    )
     # if request.method == 'POST':
         
     #     message = client.messages.create(

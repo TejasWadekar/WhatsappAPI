@@ -12,6 +12,6 @@ client = Client(account_sid, auth_token)
 
 @csrf_exempt
 def bot(request):
-    message = client.messages.create(body='Hello there!', from_='whatsapp:+14155238886', to='whatsapp:+15005550006')                                )
+    message = client.messages.create(body='Hello there!', from_='whatsapp:+14155238886', to='whatsapp:+917058921518')                                )
   
     print(message.sid)

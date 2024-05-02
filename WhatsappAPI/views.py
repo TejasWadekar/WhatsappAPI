@@ -12,7 +12,7 @@ def bot(request):
     # print(request.POST)
     # message = request.POST['Body']
     # sender_name = request.POST['ProfileName']
-    # sender_number = request.POST['From']
+    sender_number = request.POST['From']
     # print(message, sender_name, sender_number)
     
     # client.messages.create(
@@ -24,7 +24,7 @@ def bot(request):
     message = client.messages.create(
         from_='whatsapp:+14155238886',
         body='hello',
-        to='whatsapp:+917058921518'
+        to=sender_number,
     )
 
     print(message.sid)

@@ -20,13 +20,14 @@ def bot(request):
             # rest of your code
         else:
             print("Body not in POST data")
-        
-        message = client.messages.create(
+    return HttpResponse("hello")
+
+def reply(request):
+    message = client.messages.create(
         from_ = 'whatsapp:+14155238886',
         body = "hey there, How are you?",
         to = 'whatsapp:+917058921518',
 
         )
     
-        print(message.sid)
-    return HttpResponse("hello")
+    print(message.sid)

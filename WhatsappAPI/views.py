@@ -22,6 +22,7 @@ def bot(request):
             print("Body not in POST data")
     return HttpResponse("hello")
 
+@csrf_exempt
 def reply(request):
     message = client.messages.create(
         from_ = 'whatsapp:+14155238886',

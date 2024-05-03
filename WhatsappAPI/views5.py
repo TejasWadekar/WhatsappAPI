@@ -17,6 +17,7 @@ client = Client(account_sid, auth_token)
 
 # List of questions to ask the candidate
 questions = [
+    "Start ",
     "What is your current CTC?",
     "What is your expected CTC?",
     "What is your notice period (In days)?",
@@ -40,7 +41,7 @@ def send_first_message(request):
     phoneNo = request.data.get('phoneNo')
 
     # Actual First Message Transfer
-    message = client.messages.create(body=f"Dear {name},\nI hope this message finds you well. My name is {hrname} and I am reaching out to you regarding your recent application with us.\nIn order to proceed with the next steps in our hiring process, we require some additional information from you. We have a few questions that will help us better understand your fitment for the role.\nYour prompt response will be greatly appreciated and will enable us to move forward with your application.\nThank you for your time and cooperation.\nBest regards, {hrname}\n", from_='whatsapp:+14155238886', to=phoneNo)
+    message = client.messages.create(body=f"Dear {name},\n\nI hope this message finds you well. My name is {hrname} and I am reaching out to you regarding your recent application with us.\n\nIn order to proceed with the next steps in our hiring process, we require some additional information from you. We have a few questions that will help us better understand your fitment for the role.\n\nYour prompt response will be greatly appreciated and will enable us to move forward with your application.\nThank you for your time and cooperation.\n\nBest regards, {hrname}\n\n Please Type Start. ", from_='whatsapp:+14155238886', to=phoneNo)
   
     print(message.sid)
 

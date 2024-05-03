@@ -6,7 +6,9 @@ from twilio.twiml.messaging_response import MessagingResponse
 from django.conf import settings
 
 # Initialize Twilio Client with your Account SID and Auth Token
-client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+account_sid = 'ACff1c255543fb69ccf7c78b54ee85d2ee'
+auth_token = '25d3bc402171e7e2840bdee6d6091237'
+client = Client(account_sid, auth_token)
 
 # List of questions to ask the candidate
 questions = [

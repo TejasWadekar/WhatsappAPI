@@ -12,7 +12,7 @@ from rest_framework.response import Response
 
 # Initialize Twilio Client with your Account SID and Auth Token
 account_sid = 'ACff1c255543fb69ccf7c78b54ee85d2ee'
-auth_token = '25d3bc402171e7e2840bdee6d6091237'
+auth_token = 'bf0e6597c58eda1602721e23a7e5566a'
 client = Client(account_sid, auth_token)
 
 # List of questions to ask the candidate

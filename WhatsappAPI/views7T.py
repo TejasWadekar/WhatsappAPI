@@ -59,6 +59,27 @@ def send_first_message(request):
   
     print(message.sid)
 
+@csrf_exempt
+def whatsapp_webhook(request):
+    if request.method == 'POST':
+        # Get the incoming message data
+        body = request.POST.get('Body', '')
+        sender = request.POST.get('From', '')
+        print(request.POST)
+        # Process the incoming message
+        response = process_message(body, sender)
+
+        # Translate the response
+        translated_response = translate_text(response, 'es')  # Translate to Spanish
+
+        # Create TwiML response
+        twiml_response = MessagingResponse()
+        twiml_response.message(translated_response)
+
+        return HttpResponse(str(twiml_response))
+    else:
+        return HttpResponse(status=405)  # Method not allowed
+
 def process_message(message, sender):
     global conversation_state
 

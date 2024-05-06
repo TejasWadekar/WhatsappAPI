@@ -32,6 +32,7 @@ conversation_state = {
 }
 
 # Initialize translator
+Language = ''
 translator = Translator()
 
 def translate_text(text, dest_language):
@@ -42,7 +43,8 @@ def translate_text(text, dest_language):
 @api_view(['POST'])
 def send_first_message(request):
     global conversation_state
-
+    global Language
+    
     # Resetting conversation state for new chat
     conversation_state['current_question_index'] = 0
     conversation_state['answers'] = {}
@@ -52,6 +54,7 @@ def send_first_message(request):
     hrname = request.data.get('hrname')
     phoneNo = request.data.get('phoneNo')
     Lang = request.data.get('Language')
+    Language += Lang
 
     # Actual First Message Transfer
     message_body = f"Dear {name},\n\nI hope this message finds you well. My name is {hrname} and I am reaching out to you regarding your recent application with us.\n\nIn order to proceed with the next steps in our hiring process, we require some additional information from you. We have a few questions that will help us better understand your fitment for the role.\n\nYour prompt response will be greatly appreciated and will enable us to move forward with your application.\nThank you for your time and cooperation.\n\nBest regards, {hrname}\n\n Please Type Start. "
@@ -71,7 +74,7 @@ def whatsapp_webhook(request):
         response = process_message(body, sender)
 
         # Translate the response
-        translated_response = translate_text(response, 'es')  # Translate to Spanish
+        translated_response = translate_text(response, Language)  # Translate to Spanish
 
         # Create TwiML response
         twiml_response = MessagingResponse()

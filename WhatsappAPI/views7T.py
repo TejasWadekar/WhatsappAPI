@@ -51,10 +51,11 @@ def send_first_message(request):
     name = request.data.get('name')
     hrname = request.data.get('hrname')
     phoneNo = request.data.get('phoneNo')
+    Lang = request.data.get('Language')
 
     # Actual First Message Transfer
     message_body = f"Dear {name},\n\nI hope this message finds you well. My name is {hrname} and I am reaching out to you regarding your recent application with us.\n\nIn order to proceed with the next steps in our hiring process, we require some additional information from you. We have a few questions that will help us better understand your fitment for the role.\n\nYour prompt response will be greatly appreciated and will enable us to move forward with your application.\nThank you for your time and cooperation.\n\nBest regards, {hrname}\n\n Please Type Start. "
-    translated_message_body = translate_text(message_body, 'es')  # Translate to Spanish
+    translated_message_body = translate_text(message_body, Lang)  # Translate to Given Language
     message = client.messages.create(body=translated_message_body, from_='whatsapp:+14155238886', to=phoneNo)
   
     print(message.sid)

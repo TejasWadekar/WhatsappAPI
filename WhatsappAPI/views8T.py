@@ -57,6 +57,7 @@ def send_first_message(request):
     # global Language
 
     # Resetting conversation state for new chat
+    conversation_state['Language'] = ''
     conversation_state['current_question_index'] = 0
     conversation_state['answers'] = {}
     conversation_state['conversation_ended'] = False  # Reset the flag here
@@ -65,8 +66,6 @@ def send_first_message(request):
     name = request.data.get('name')
     hrname = request.data.get('hrname')
     phoneNo = request.data.get('phoneNo')
-    # Lang = request.data.get('Language')
-    # Language += Lang
 
     # Actual First Message Transfer
     message_body = f"Dear {name},\n\nI hope this message finds you well. My name is {hrname} and I am reaching out to you regarding your recent application with us.\n\nIn order to proceed with the next steps in our hiring process, we require some additional information from you. We have a few questions that will help us better understand your fitment for the role.\n\nYour prompt response will be greatly appreciated and will enable us to move forward with your application.\nThank you for your time and cooperation.\n\nBest regards, {hrname}\n\n Please Type Start. "
@@ -89,10 +88,6 @@ def whatsapp_webhook(request):
 
         # Translate the response
         translated_response = translate_text(response, conversation_state['Language'])  # Translate
-
-        # Reset the language to blank after the summary is sent
-        if conversation_state['conversation_ended']:
-            conversation_state['Language'] = ''
 
         # Create TwiML response
         twiml_response = MessagingResponse()

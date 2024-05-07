@@ -63,6 +63,8 @@ def send_first_message(request):
   
     print(message.sid)
 
+    return HttpResponse(status=200)
+
 @csrf_exempt
 def whatsapp_webhook(request):
     if request.method == 'POST':

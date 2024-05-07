@@ -1,3 +1,4 @@
+from langdetect import detect
 from googletrans import Translator
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -35,6 +36,13 @@ conversation_state = {
 # Initialize translator
 # Language = ''
 translator = Translator()
+
+# Language Detector
+def detect_language(text):
+    try:
+        return detect(text)
+    except:
+        return None
 
 def translate_text(text, dest_language):
     # Translate the text to the destination language
@@ -100,7 +108,8 @@ def whatsapp_webhook(request):
 
 def process_message(message, sender):
     global conversation_state
-
+    user_language = detect_language(message)
+    
     # If the conversation has ended, Needs to stop
     if conversation_state['conversation_ended']:
         return "Thank you for your time. Have a great day!" 
@@ -120,8 +129,13 @@ def process_message(message, sender):
     else:
         # End of conversation, generate summary
         summary = generate_summary()
-        translated_summary = translate_text(summary, conversation_state['Language'])  # Translate to Spanish
-        return translated_summary
+        # translated_summary = translate_text(summary, conversation_state['Language'])  # Translate to Spanish
+        # return translated_summary
+        if user_language != conversation_state['Language']:
+            translated_summary = translate_text(summary, conversation_state['Language'])
+            return translated_summary
+        
+        return summary
 
 def generate_summary():
     global conversation_state

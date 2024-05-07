@@ -101,12 +101,12 @@ def process_message(message, sender):
         # Move to the next question
         conversation_state['current_question_index'] += 1
         next_question = questions[current_question_index + 1]
-        translated_next_question = translate_text(next_question, 'es')  # Translate to Spanish
+        translated_next_question = translate_text(next_question, Language)  # Translate to Spanish
         return translated_next_question
     else:
         # End of conversation, generate summary
         summary = generate_summary()
-        translated_summary = translate_text(summary, 'es')  # Translate to Spanish
+        translated_summary = translate_text(summary, Language)  # Translate to Spanish
         return translated_summary
 
 def generate_summary():

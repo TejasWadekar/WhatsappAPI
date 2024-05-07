@@ -88,7 +88,11 @@ def whatsapp_webhook(request):
         response = process_message(body, sender)
 
         # Translate the response
-        translated_response = translate_text(response, conversation_state['Language'])  # Translate to Spanish
+        translated_response = translate_text(response, conversation_state['Language'])  # Translate
+
+        # Reset the language to blank after the summary is sent
+        if conversation_state['conversation_ended']:
+            conversation_state['Language'] = ''
 
         # Create TwiML response
         twiml_response = MessagingResponse()
@@ -137,6 +141,6 @@ def generate_summary():
     conversation_state['current_question_index'] = 0
     conversation_state['answers'] = {}
     conversation_state['conversation_ended'] = True
-    conversation_state['Language'] = ''  # Reset the language to default
+
 
     return summary

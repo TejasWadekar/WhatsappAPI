@@ -1,9 +1,8 @@
-from azure.ai.textanalytics import TextAnalyticsClient
-from azure.core.credentials import AzureKeyCredential
-
+import requests, uuid, json
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from twilio.twiml.messaging_response import MessagingResponse
+from django.conf import settings
 from twilio.rest import Client
 
 # REST
@@ -35,9 +34,26 @@ conversation_state = {
 }
 
 # Initialize translator
-key = "476bd55d5df04703a105bfb0595ce885"
+subscription_key = "476bd55d5df04703a105bfb0595ce885"
 endpoint = "https://api.cognitive.microsofttranslator.com/"
-translator = TextAnalyticsClient(endpoint=endpoint, credential=AzureKeyCredential(key))
+location = "eastus"
+
+path = '/translate'
+constructed_url = endpoint + path
+
+params = {
+    'api-version': '3.0',
+    'from': 'en',
+    'to': []
+}
+constructed_url = endpoint + path
+
+headers = {
+    'Ocp-Apim-Subscription-Key': subscription_key,
+    'Ocp-Apim-Subscription-Region': location,
+    'Content-type': 'application/json',
+    'X-ClientTraceId': str(uuid.uuid4())
+}
 
 def translate_text(text, dest_language):
     # Translate the text to the destination language
@@ -45,20 +61,27 @@ def translate_text(text, dest_language):
     # Check if destination language is assigned
     if dest_language:
         # Translate the text to the destination language
-        response = translator.translate_documents([{"id": "1", "text": text, "to": dest_language}])
-        for result in response:
-            if not result.is_error:
-                for doc in result.translations:
-                    return doc.text
+        body = [{
+            'text': text
+        }]
+        params['to'] = [dest_language]  # Set the destination language
+        request = requests.post(constructed_url, params=params, headers=headers, json=body)
+        response = request.json()
+        return response[0]['translations'][0]['text']
     else:
         # If no language is assigned, return the original text
         return f"{text} : No Translation Language Detected!"
     
 # Language Detector
+# Later try for old detection
 def detect_language(text):
     try:
-        response = translator.detect_language(documents=[{"id": "1", "text": text}])
-        return response[0].primary_language.iso6391_name
+        body = [{
+            'text': text
+        }]
+        request = requests.post(constructed_url, params=params, headers=headers, json=body)
+        response = request.json()
+        return response[0]['detectedLanguage']['language']
     except:
         return None
 
@@ -125,7 +148,7 @@ def whatsapp_webhook(request):
 def process_message(message, sender):
     global conversation_state
 
-    user_language = detect_language(message)  # May need to change above function and try
+    user_language = detect_language(message)
 
 
     # If the conversation has ended, Needs to stop

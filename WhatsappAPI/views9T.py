@@ -98,8 +98,12 @@ def whatsapp_webhook(request):
         # Check if the conversation has started
         if not conversation_state['conversation_started']:
             # If not, send the "Contact HR" message and return
+            message = "Thank you for your time. Have a great day!\n\nContact HR for further queries."
+            # Translation Logic
+            translated_message = translate_text(message, conversation_state['Language'])
+
             twiml_response = MessagingResponse()
-            twiml_response.message("Contact HR for further queries")
+            twiml_response.message(translated_message)
             return HttpResponse(str(twiml_response))
 
         # Process the incoming message

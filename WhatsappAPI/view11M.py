@@ -75,23 +75,23 @@ def translate_text(text, dest_language):
         return f"{text} : No Translation Language Detected!"
     
 # Microsoft Language Detector
-# def detect_language(text):
-#     try:
-#         body = [{
-#             'text': text
-#         }]
-#         request = requests.post(constructed_url, params=params, headers=headers, json=body)
-#         response = request.json()
-#         return response[0]['detectedLanguage']['language']
-#     except:
-#         return None
-    
-# Local Language Detector
 def detect_language(text):
     try:
-        return detect(text)
+        body = [{
+            'text': text
+        }]
+        request = requests.post(constructed_url, params=params, headers=headers, json=body)
+        response = request.json()
+        return response[0]['detectedLanguage']['language']
     except:
         return None
+    
+# Local Language Detector
+# def detect_language(text):
+#     try:
+#         return detect(text)
+#     except:
+#         return None
 
 @api_view(['POST'])
 def send_first_message(request):

@@ -180,9 +180,9 @@ def process_message(message, sender):
         summary = generate_summary()
         # translated_summary = translate_text(summary, conversation_state['Language'])  # Translate to Spanish
         # return translated_summary
-        if user_language != conversation_state['Language']:
-            translated_summary = translate_text(summary, conversation_state['Language'])
-            return translated_summary
+        # if user_language != conversation_state['Language']:
+        #     translated_summary = translate_text(summary, conversation_state['Language'])
+        #     return translated_summary
         # THis if loop can be removed
         return summary
 

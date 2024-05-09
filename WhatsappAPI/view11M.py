@@ -108,10 +108,10 @@ def send_first_message(request):
     name = request.data.get('name')
     hrname = request.data.get('hrname')
     phoneNo = request.data.get('phoneNo')
-
+    JD = request.data.get('JobD')
 
     # Actual First Message Transfer
-    message_body = f"Dear {name},\n\nI hope this message finds you well. My name is {hrname} and I am reaching out to you regarding your recent application with us.\n\nIn order to proceed with the next steps in our hiring process, we require some additional information from you. We have a few questions that will help us better understand your fitment for the role.\n\nYour prompt response will be greatly appreciated and will enable us to move forward with your application.\nThank you for your time and cooperation.\n\nBest regards, {hrname}\n\n Please Type Start. "
+    message_body = f"{JD}\n\n\nDear {name},\n\nI hope this message finds you well. My name is {hrname} and I am reaching out to you regarding your recent application with us.\n\nIn order to proceed with the next steps in our hiring process, we require some additional information from you. We have a few questions that will help us better understand your fitment for the role.\n\nYour prompt response will be greatly appreciated and will enable us to move forward with your application.\nThank you for your time and cooperation.\n\nBest regards, {hrname}\n\n Please Type Start. "
     translated_message_body = translate_text(message_body, conversation_state['Language'])  # Translate to conversation_state['Language']
     message = client.messages.create(body=translated_message_body, from_='whatsapp:+14155238886', to=phoneNo)
   

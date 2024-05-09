@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import bot
 from .Views2 import whatsapp_webhook, process_message
-from .views10M import whatsapp_webhook, send_first_message
+from .views11M import whatsapp_webhook, send_first_message
 
 
 urlpatterns = [

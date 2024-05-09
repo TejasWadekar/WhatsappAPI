@@ -110,12 +110,16 @@ def send_first_message(request):
     phoneNo = request.data.get('phoneNo')
     JD = request.data.get('JobD')
 
+    Comm_msg = f"Dear {name},\n\nI hope this message finds you well. My name is {hrname} and I am reaching out to you regarding your recent application with us.\n\nIn order to proceed with the next steps in our hiring process, we require some additional information from you. We have a few questions that will help us better understand your fitment for the role.\n\nYour prompt response will be greatly appreciated and will enable us to move forward with your application.\nThank you for your time and cooperation.\n\nBest regards, {hrname}\n\n Please Type Start. "
+    li = [JD,Comm_msg]
     # Actual First Message Transfer
-    message_body = f"{JD}\n\n\nDear {name},\n\nI hope this message finds you well. My name is {hrname} and I am reaching out to you regarding your recent application with us.\n\nIn order to proceed with the next steps in our hiring process, we require some additional information from you. We have a few questions that will help us better understand your fitment for the role.\n\nYour prompt response will be greatly appreciated and will enable us to move forward with your application.\nThank you for your time and cooperation.\n\nBest regards, {hrname}\n\n Please Type Start. "
-    translated_message_body = translate_text(message_body, conversation_state['Language'])  # Translate to conversation_state['Language']
-    message = client.messages.create(body=translated_message_body, from_='whatsapp:+14155238886', to=phoneNo)
-  
-    print(message.sid)
+    for i in range(len(li)):
+        message_body = li[i]
+        translated_message_body = translate_text(message_body, conversation_state['Language'])  # Translate to conversation_state['Language']
+        message = client.messages.create(body=translated_message_body, from_='whatsapp:+14155238886', to=phoneNo)
+    
+        print(message.sid)
+
 
     return HttpResponse(status=200)
 

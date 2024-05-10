@@ -13,7 +13,7 @@ from rest_framework.response import Response
 
 # Initialize Twilio Client with your Account SID and Auth Token
 account_sid = 'ACff1c255543fb69ccf7c78b54ee85d2ee'
-auth_token = '92d4a02fd9039e4497320c9fa45d0172'
+auth_token = 'c1ae964f6c85b5a356a205e12a0ae7df'
 client = Client(account_sid, auth_token)
 
 questions = [

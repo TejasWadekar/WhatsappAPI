@@ -45,7 +45,7 @@ constructed_url = endpoint + path
 
 params = {
     'api-version': '3.0',
-    'from': 'en',
+    'from': '',
     'to': []
 }
 constructed_url = endpoint + path
@@ -67,6 +67,7 @@ def translate_text(text, dest_language):
             'text': text
         }]
         params['to'] = [dest_language]  # Set the destination language
+        params['from'] = 'en'
         request = requests.post(constructed_url, params=params, headers=headers, json=body)
         response = request.json()
         return response[0]['translations'][0]['text']

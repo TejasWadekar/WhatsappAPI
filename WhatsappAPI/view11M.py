@@ -119,7 +119,8 @@ def send_first_message(request):
         translated_message_body = translate_text(message_body, conversation_state['Language'])  # Translate to conversation_state['Language']
         message = client.messages.create(body=translated_message_body, from_='whatsapp:+14155238886', to=phoneNo)
     
-        print(message.sid)
+        print(message)
+        
 
 
     return HttpResponse(status=200)

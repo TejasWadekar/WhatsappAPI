@@ -179,6 +179,16 @@ def process_message(message, sender):
         # Move to the next question
         conversation_state['current_question_index'] += 1
         next_question = questions[current_question_index + 1]
+        if next_question == "What is your expected CTC?":
+            if int(message) > 350000:
+                return translated_next_question = translate_text("Are you willing to negotiate?", conversation_state['Language'])
+            elif next_question == "What is your notice period (In days)?":
+                if int(message) > 30:
+                    return translated_next_question = translate_text("We can have maximum 30 days Notice only can you manage it?", conversation_state['Language'])
+            elif next_question == "What is your current location?":
+                if message != "Pune":
+                    return translated_next_question = translate_text("Are you willing to relocate to Pune?")
+                    
         translated_next_question = translate_text(next_question, conversation_state['Language'])  # Translate to Given lang
         return translated_next_question
     else:
